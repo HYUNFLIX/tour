@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>푸꾸옥 가족 여행 상세 계획안</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #05668D;
+            --secondary-color: #028090;
+            --accent-color: #FF9800;
+            --light-bg: #f9f9f9;
+            --card-bg: white;
+            --text-color: #333;
+            --border-radius: 10px;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background-color: var(--light-bg);
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .top-nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 100;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .top-nav a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 5px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+        
+        .top-nav a:active,
+        .top-nav a:hover {
+            background-color: rgba(5, 102, 141, 0.1);
+        }
+        
+        .container {
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+            line-height: 1.3;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-top: 25px;
+            font-size: 1.5em;
+            scroll-margin-top: 65px;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 20px;
+            font-size: 1.3em;
+        }
+        
+        h4 {
+            font-size: 1.1em;
+            margin: 15px 0 5px 0;
+        }
+        
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .trip-overview {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .overview-item {
+            background-color: #e6f3f8;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .overview-item h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        th, td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            position: sticky;
+            top: 50px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 모바일에서 테이블 개선 */
+        @media (max-width: 600px) {
+            .responsive-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .time-col {
+                min-width: 80px;
+                width: 25%;
+            }
+            
+            th, td {
+                white-space: normal;
+                min-height: 3em;
+            }
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin-bottom: 6px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .day-plan {
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .day-plan h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 1.2em;
+        }
+        
+        .highlight {
+            background-color: #ffecb3;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .tips {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 5px solid #4caf50;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .warning {
+            background-color: #ffebee;
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 5px solid #f44336;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .restaurant, .attraction {
+            background-color: var(--card-bg);
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .restaurant h4, .attraction h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+        }
+        
+        .rating {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-left: 6px;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 15px;
+            color: #666;
+            font-size: 0.9em;
+            background-color: var(--card-bg);
+            border-top: 1px solid #eee;
+        }
+        
+        /* 모바일 친화적인 추가 스타일 */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 99;
+            opacity: 0.8;
+        }
+        
+        /* 더 큰 화면 최적화 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 95%;
+                margin: 0 auto;
+            }
+            
+            .trip-overview {
+                flex-direction: row;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            h2 {
+                font-size: 1.7em;
+            }
+            
+            h3 {
+                font-size: 1.4em;
+            }
+            
+            table, th, td {
+                font-size: 16px;
+            }
+            
+            .tips, .warning {
+                font-size: 16px;
+            }
+        }
+        
+        /* 아주 큰 화면 최적화 */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1000px;
+            }
+        }
+        
+        /* 다크 모드 지원 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #0288d1;
+                --secondary-color: #039be5;
+                --light-bg: #121212;
+                --card-bg: #1e1e1e;
+                --text-color: #e0e0e0;
+            }
+            
+            .overview-item {
+                background-color: #263238;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #2c2c2c;
+            }
+            
+            th, td {
+                border-bottom: 1px solid #333;
+            }
+            
+            .tips {
+                background-color: #1b3a27;
+                border-left-color: #2e7d32;
+            }
+            
+            .warning {
+                background-color: #3e2723;
+                border-left-color: #c62828;
+            }
+            
+            .top-nav {
+                background-color: rgba(30, 30, 30, 0.95);
+            }
+            
+            .top-nav a {
+                color: #81d4fa;
+            }
+            
+            .top-nav a:active,
+            .top-nav a:hover {
+                background-color: rgba(2, 136, 209, 0.2);
+            }
+            
+            .highlight {
+                background-color: #3e2723;
+                color: #ffcc80;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>푸꾸옥 가족 여행 상세 계획안</h1>
+        <p>2025년 5월 16일 - 5월 20일 (3박 5일)</p>
+    </header>
+    
+    <div class="top-nav">
+        <a href="#overview">개요</a>
+        <a href="#preparation">준비사항</a>
+        <a href="#itinerary">상세일정</a>
+        <a href="#restaurants">맛집</a>
+        <a href="#attractions">관광지</a>
+        <a href="#tips">유용정보</a>
+        <a href="#hotel">숙소정보</a>
+    </div>
+
+    <div class="container">
+        <div class="trip-overview" id="overview">
+            <div class="overview-item">
+                <h3>숙소</h3>
+                <p>빈펄 원더월드 푸꾸옥<br>
+                (Vinpearl Wonderworld Phu Quoc)<br>
+                4베드룸 빌라 - 전용 수영장</p>
+            </div>
+            <div class="overview-item">
+                <h3>여행 일정</h3>
+                <p>출발: 2025.05.16 (금) 18:00 인천<br>
+                귀국: 2025.05.20 (화) 05:45 인천</p>
+            </div>
+            <div class="overview-item">
+                <h3>인원</h3>
+                <p>성인 7명<br>아동 1명 (1세)</p>
+            </div>
+        </div>
+
+        <div class="info-card section" id="preparation">
+            <h2>여행 전 준비사항</h2>
+            
+            <h3>필수 준비물</h3>
+            <ul>
+                <li><strong>여권</strong> (유효기간 6개월 이상)</li>
+                <li><strong>베트남 입국 서류</strong> (15일 이내 무비자 입국 가능)</li>
+                <li>해외 로밍 또는 현지 SIM 카드</li>
+                <li>현금 (미국 달러 또는 베트남 동)</li>
+                <li>신용카드 (해외사용 가능한 카드)</li>
+                <li>여행자보험</li>
+                <li>모기 퇴치제</li>
+                <li>썬크림 및 자외선 차단제</li>
+                <li>수영복과 비치 타월</li>
+                <li>우산 또는 비옷 (5월은 우기 시작 시기)</li>
+                <li>여행용 어댑터</li>
+                <li>상비약 (진통제, 소화제, 밴드 등)</li>
+            </ul>
+
+            <h3>날씨 정보</h3>
+            <p>5월 푸꾸옥 평균 기온: 27-32°C, 습도 높음, 간헐적 스콜성 비</p>
+        </div>
+
+        <div class="section" id="itinerary">
+            <h2>상세 일정</h2>
+
+            <div class="day-plan">
+                <h3>1일차 (5월 16일, 금요일)</h3>
+                <h4>인천 → 푸꾸옥 도착 및 휴식</h4>
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="time-col">시간</th>
+                                <th>일정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15:00</td>
+                                <td>인천공항 집결 (1터미널)</td>
+                            </tr>
+                            <tr>
+                                <td>18:00</td>
+                                <td>제주항공 7C 2315 탑승</td>
+                            </tr>
+                            <tr>
+                                <td>21:20</td>
+                                <td>푸꾸옥 국제공항 도착</td>
+                            </tr>
+                            <tr>
+                                <td>22:00</td>
+                                <td>입국 수속 완료 및 리조트로 이동</td>
+                            </tr>
+                            <tr>
+                                <td>23:00</td>
+                                <td>빈펄 원더월드 푸꾸옥 체크인</td>
+                            </tr>
+                            <tr>
+                                <td>23:30</td>
+                                <td>간단한 야식 후 휴식</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>교통</strong>: 공항에서 리조트까지 약 40분 소요 (택시 또는 리조트 셔틀)</p>
+            </div>
+
+            <div class="day-plan">
+                <h3>2일차 (5월 17일, 토요일)</h3>
+                <h4>빈원더스 & 빈펄 사파리 탐험</h4>
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="time-col">시간</th>
+                                <th>일정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07:30-09:00</td>
+                                <td>호텔 아침식사</td>
+                            </tr>
+                            <tr>
+                                <td>09:30-12:30</td>
+                                <td>
+                                    <strong>빈펄 사파리 푸꾸옥 방문</strong>
+                                    <ul>
+                                        <li>베트남 최초이자 유일한 오픈 동물원</li>
+                                        <li>약 380헥타르 부지에 150여 종, 3000마리 이상의 동물</li>
+                                        <li>특수 제작된 차량을 타고 동물 관찰</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>13:00-14:30</td>
+                                <td>리조트 내 레스토랑에서 점심</td>
+                            </tr>
+                            <tr>
+                                <td>15:00-19:00</td>
+                                <td>
+                                    <strong>빈원더스 푸꾸옥 테마파크</strong>
+                                    <ul>
+                                        <li>아시아 최대 규모의 테마파크, 동남아 최대 워터파크</li>
+                                        <li>토네이도 슬라이드, 자이언트 부메랑 등 스릴 넘치는 어트랙션</li>
+                                        <li>아쿠아리움 방문 (해양 생물 관찰)</li>
+                                        <li>파이어 피닉스 광장에서 멀티미디어 공연 관람</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>19:30-21:00</td>
+                                <td>저녁식사 (Neptune 레스토랑 - 씨푸드 스페셜티)</td>
+                            </tr>
+                            <tr>
+                                <td>21:30</td>
+                                <td>호텔 복귀 및 휴식</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="tips"><strong>팁</strong>: 리조트 숙박 시 빈원더스 및 사파리 입장권이 포함된 패키지나 할인권을 제공받을 수 있으니 프론트에 문의하세요. 리조트에서 무료 셔틀버스도 운행합니다.</p>
+            </div>
+
+            <div class="day-plan">
+                <h3>3일차 (5월 18일, 일요일)</h3>
+                <h4>푸꾸옥 섬 탐험 & 마사지</h4>
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="time-col">시간</th>
+                                <th>일정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07:30-08:30</td>
+                                <td>아침식사</td>
+                            </tr>
+                            <tr>
+                                <td>09:00-12:00</td>
+                                <td>
+                                    <strong>남부 투어</strong>
+                                    <ul>
+                                        <li>Sao Beach (푸꾸옥에서 가장 아름다운 백사장과 에메랄드빛 바다)</li>
+                                        <li>Ho Quoc Pagoda (불교 사원)</li>
+                                        <li>후추 농장 방문 (푸꾸옥 특산품)</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12:30-14:00</td>
+                                <td>점심식사 - <strong>Vinh Xanh</strong> (즈엉동 시장 근처 현지 해산물 맛집)</td>
+                            </tr>
+                            <tr>
+                                <td>14:30-16:30</td>
+                                <td>
+                                    <strong>Thanh Trà Spa</strong> <span class="rating">★5.0</span>
+                                    <ul>
+                                        <li>가족 단위로 마사지 및 스파 트리트먼트</li>
+                                        <li>베트남 전통 마사지 체험</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>17:00-19:00</td>
+                                <td>
+                                    <strong>선셋 타운 & 키스 브릿지</strong>
+                                    <ul>
+                                        <li>두 개의 독립된 다리가 30cm 간격으로 마주보는 독특한 디자인</li>
+                                        <li>일몰 감상 (최고의 인생샷 포인트)</li>
+                                        <li>오후 5시부터 15분간 진행되는 '어웨이큰 씨 쇼' 관람</li>
+                                        <li>저녁 7시45분 '심포니 오프 더 씨 쇼' (불꽃과 조명 쇼)</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>19:30-21:00</td>
+                                <td>
+                                    <strong>저녁식사 - Bo To Quan</strong>
+                                    <ul>
+                                        <li>베트남 푸꾸옥 즈엉동 시내의 소고기 요리 전문점</li>
+                                        <li>현지인과 관광객에게 모두 인기있는 바비큐 맛집</li>
+                                        <li>킹콩마트에서 도보 5분 거리에 위치</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>21:30</td>
+                                <td>호텔 복귀</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="tips"><strong>교통</strong>: 전일 투어는 가이드와 차량 대여 추천 (약 $80-100/일)</p>
+            </div>
+
+            <div class="day-plan">
+                <h3>4일차 (5월 19일, 월요일)</h3>
+                <h4>휴식, 카페 탐방 및 출국</h4>
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="time-col">시간</th>
+                                <th>일정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>08:00-09:30</td>
+                                <td>아침식사</td>
+                            </tr>
+                            <tr>
+                                <td>10:00-12:00</td>
+                                <td>빌라 전용 수영장에서 휴식</td>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td><span class="highlight">체크아웃</span></td>
+                            </tr>
+                            <tr>
+                                <td>12:30-14:00</td>
+                                <td>
+                                    <strong>점심식사 - 세일링 클럽 푸꾸옥</strong> <span class="rating">★4.5</span>
+                                    <ul>
+                                        <li>편안한 분위기의 레스토랑</li>
+                                        <li>다양한 현지 및 국제 요리 제공</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14:30-15:30</td>
+                                <td>
+                                    <strong>CAFE GREEN 방문</strong> <span class="rating">★4.9</span>
+                                    <ul>
+                                        <li>망고 빙수와 신선한 열대 과일 전문점</li>
+                                        <li>베트남 커피 시음</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>16:00-17:30</td>
+                                <td>
+                                    <strong>킹콩마트</strong> <span class="rating">★4.4</span>
+                                    <ul>
+                                        <li>한국인 관광객에게 인기있는 쇼핑 장소</li>
+                                        <li>현지 기념품 및 특산물 구매</li>
+                                        <li>베트남 커피, 후추, 피쉬 소스 등 쇼핑</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>18:00-19:30</td>
+                                <td>
+                                    <strong>저녁식사 - MEO Kitchen</strong> <span class="rating">★4.8</span>
+                                    <ul>
+                                        <li>현지인들에게도 인기있는 베트남 요리 전문점</li>
+                                        <li>마지막 저녁 식사로 베트남 요리 체험</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>19:30</td>
+                                <td>공항으로 이동</td>
+                            </tr>
+                            <tr>
+                                <td>23:00</td>
+                                <td>제주항공 7C 2316 탑승</td>
+                            </tr>
+                            <tr>
+                                <td>05:45(+1)</td>
+                                <td>인천공항 도착 (5월 20일)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="warning"><strong>주의사항</strong>: 체크아웃 후 짐은 리조트에 맡겨두고 마지막 일정 진행 가능</p>
+            </div>
+        </div>
+
+        <div class="info-card section" id="restaurants">
+            <h2>추천 식당 및 맛집</h2>
+            <div class="restaurant">
+                <h4>1. Bo To Quan</h4>
+                <p>즈엉동 시내에 위치한 소고기 바비큐 전문점으로 현지인과 관광객 모두에게 인기가 많은 맛집</p>
+            </div>
+            <div class="restaurant">
+                <h4>2. Vinh Xanh</h4>
+                <p>즈엉동 시장 근처 현지 어부들이 잡은 신선한 해산물을 저렴한 가격에 맛볼 수 있는 해산물 전문점</p>
+            </div>
+            <div class="restaurant">
+                <h4>3. MEO Kitchen</h4>
+                <p><span class="rating">★4.8</span> 베트남 요리 전문점, 현지 맛을 정통으로 맛볼 수 있는 인기 레스토랑</p>
+            </div>
+            <div class="restaurant">
+                <h4>4. 세일링 클럽 푸꾸옥</h4>
+                <p><span class="rating">★4.5</span> 편안한 분위기에서 다양한 요리를 즐길 수 있는 레스토랑</p>
+            </div>
+            <div class="restaurant">
+                <h4>5. CAFE GREEN</h4>
+                <p><span class="rating">★4.9</span> 망고 빙수와 열대 과일 전문점, 더운 날씨에 시원한 디저트 제공</p>
+            </div>
+            <div class="restaurant">
+                <h4>6. 안바 카페</h4>
+                <p><span class="rating">★4.6</span> 현지 인기 카페로 베트남 커피와 함께 여유로운 시간을 보낼 수 있는 곳</p>
+            </div>
+            <div class="restaurant">
+                <h4>7. AM PM - Specialty Coffee and Wine bar</h4>
+                <p><span class="rating">★4.9</span> 스페셜티 커피와 와인을 함께 즐길 수 있는 모던한 분위기의 바</p>
+            </div>
+            <div class="restaurant">
+                <h4>8. Bơ restaurant & coffee</h4>
+                <p><span class="rating">★4.8</span> 레스토랑과 카페가 함께 있어 식사와 커피를 모두 즐길 수 있는 곳</p>
+            </div>
+        </div>
+
+        <div class="info-card section" id="attractions">
+            <h2>푸꾸옥 추천 관광지 및 액티비티</h2>
+            <div class="attraction">
+                <h4>1. 빈원더스 푸꾸옥 (VinWonders Phu Quoc)</h4>
+                <p>베트남에서 가장 크고 아시아 최대 규모의 테마파크로, 워터파크, 놀이공원, 아쿠아리움, 멀티미디어 공연 등 다양한 어트랙션 제공</p>
+            </div>
+            <div class="attraction">
+                <h4>2. 빈펄 사파리 푸꾸옥 (Vinpearl Safari Phu Quoc)</h4>
+                <p>베트남 최초이자 유일한 오픈 동물원으로, 약 380 헥타르 부지에 150여 종, 3000마리 이상의 동물들이 서식</p>
+            </div>
+            <div class="attraction">
+                <h4>3. 선셋 타운 키스 브릿지 (Sunset Town Kiss Bridge)</h4>
+                <p>두 개의 독립된 구조물이 바다 위에서 약 30cm 간격으로 마주보는 독특한 디자인의 다리로, 일몰 명소</p>
+            </div>
+            <div class="attraction">
+                <h4>4. Sao Beach</h4>
+                <p>푸꾸옥에서 가장 아름다운 해변 중 하나로 백사장과 에메랄드빛 바다가 인상적인 곳</p>
+            </div>
+            <div class="attraction">
+                <h4>5. Thanh Trà Spa</h4>
+                <p><span class="rating">★5.0</span> 완벽한 평점을 받은 스파로, 베트남 전통 마사지와 다양한 트리트먼트 제공</p>
+            </div>
+            <div class="attraction">
+                <h4>6. 킹콩마트 (Kingkong Mart)</h4>
+                <p><span class="rating">★4.4</span> 한국인 관광객들에게 인기 있는 쇼핑 장소로, 현지 기념품과 특산물 구매 가능</p>
+            </div>
+            <div class="attraction">
+                <h4>7. Duong Dong Night Market</h4>
+                <p>현지 음식과 기념품을 구경하고 쇼핑할 수 있는 야시장</p>
+            </div>
+            <div class="attraction">
+                <h4>8. Phu Quoc Cable Car</h4>
+                <p>세계에서 가장 긴 해상 케이블카로 혼톰섬까지 연결되는 멋진 경관을 자랑</p>
+            </div>
+        </div>
+
+        <div class="info-card section" id="tips">
+            <h2>유용한 정보</h2>
+            
+            <h3>교통</h3>
+            <ul>
+                <li><strong>택시</strong>: 미터기 사용, 합리적인 가격</li>
+                <li><strong>렌터카/오토바이</strong>: 섬 전체를 둘러보기 좋음 (국제 운전면허증 필요)</li>
+                <li><strong>호텔 셔틀</strong>: 빈펄 리조트는 자체 셔틀 서비스 제공 (빈원더스 및 사파리까지 무료 셔틀)</li>
+            </ul>
+
+            <h3>현지 팁</h3>
+            <ul>
+                <li><strong>언어</strong>: 영어는 관광지와 호텔에서만 통용, 간단한 베트남어 인사말 준비 권장</li>
+                <li><strong>화폐</strong>: 베트남 동(VND)을 주로 사용, 달러도 일부 사용 가능</li>
+                <li><strong>팁 문화</strong>: 의무는 아니지만 좋은 서비스에는 10% 정도 권장</li>
+                <li><strong>전압</strong>: 220V (한국과 동일)</li>
+                <li><strong>인터넷</strong>: 대부분의 호텔과 카페에서 무료 Wi-Fi 제공</li>
+                <li><strong>베트남의 몰디브</strong>: 푸꾸옥은 맑고 투명한 에메랄드빛 바다와 고운 백사장으로 '베트남의 몰디브'라 불림</li>
+            </ul>
+
+            <h3>긴급연락처</h3>
+            <ul>
+                <li>한국 영사관 긴급전화: +84-90-340-1159</li>
+                <li>경찰: 113</li>
+                <li>구급차: 115</li>
+            </ul>
+
+            <h3>쇼핑 아이템</h3>
+            <ul>
+                <li>후추 (푸꾸옥 특산품)</li>
+                <li>피쉬 소스 (뉴억맘, 전통 제조법으로 유명)</li>
+                <li>진주 제품</li>
+                <li>현지 수공예품</li>
+                <li>베트남 커피</li>
+            </ul>
+        </div>
+
+        <div class="info-card section" id="hotel">
+            <h2>빈펄 원더월드 푸꾸옥 리조트 정보</h2>
+            <ul>
+                <li><strong>평점</strong>: <span class="rating">★4.9</span> (21,529 리뷰)</li>
+                <li><strong>등급</strong>: 5성급 호텔</li>
+                <li><strong>체크인</strong>: 14:00부터</li>
+                <li><strong>체크아웃</strong>: 12:00까지</li>
+                <li><strong>시설</strong>:
+                    <ul>
+                        <li>전용 수영장이 있는 4베드룸 빌라</li>
+                        <li>다양한 레스토랑 및 바</li>
+                        <li>스파 및 피트니스 센터</li>
+                        <li>어린이 클럽</li>
+                        <li>개인 해변</li>
+                        <li>워터파크 접근성</li>
+                    </ul>
+                </li>
+                <li><strong>특전</strong>: 리조트 숙박 시 빈원더스 및 빈펄 사파리 입장권 할인 또는 패키지 제공</li>
+                <li><strong>위치</strong>: Bai Dai Zone, Ganh Dau Commune, Ganh Dau, 푸꾸옥, 베트남</li>
+                <li><strong>연락처</strong>: +84 24 3974 9999</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 푸꾸옥 가족 여행 계획 | 작성일: 2025년 4월 20일</p>
+        <p>즐거운 여행 되세요!</p>
+    </footer>
+    
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // 스크롤에 따라 상단 탐색 메뉴 표시/숨김
+        let prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            let currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.querySelector(".top-nav").style.top = "0";
+            } else {
+                document.querySelector(".top-nav").style.top = "-50px";
+            }
+            prevScrollpos = currentScrollPos;
+            
+            // 스크롤 위치에 따라 맨 위로 버튼 표시/숨김
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                document.querySelector(".back-to-top").style.display = "flex";
+            } else {
+                document.querySelector(".back-to-top").style.display = "none";
+            }
+        }
+        
+        // 맨 위로 버튼 클릭시 상단으로 스크롤
+        document.querySelector(".back-to-top").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // 페이지 로드시 맨 위로 버튼 상태 설정
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".back-to-top").style.display = "none";
+        });
+    </script>
+</body>
+</html>
