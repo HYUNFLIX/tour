@@ -117,24 +117,357 @@ h4 {
     margin-bottom: 20px;
 }
 
+/* 아이콘 폰트 스타일 (실제로는 Font Awesome이나 Material Icons 등을 사용할 수 있습니다) */
+.icon-calendar:before { content: "📅"; }
+.icon-hotel:before { content: "🏨"; }
+.icon-plane:before { content: "✈️"; }
+.icon-people:before { content: "👪"; }
+
+/* 개요 섹션 스타일 수정 */
 .trip-overview {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.overview-hero {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
+.overview-hero:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://source.unsplash.com/1200x900/?phuquoc,vietnam,island') center/cover no-repeat;
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    z-index: 2;
+}
+
+.destination-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.overview-title {
+    font-size: 1.8em;
+    margin: 10px 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+}
+
+.overview-dates {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.overview-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
 .overview-item {
-    background-color: #e6f3f8;
-    padding: 15px;
+    background-color: var(--card-bg);
+    padding: 20px;
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid var(--primary-color);
+}
+
+.overview-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.overview-icon {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
 .overview-item h3 {
     margin-top: 0;
+    margin-bottom: 10px;
     color: var(--primary-color);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.overview-item p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 주요 일정 하이라이트 섹션 */
+.trip-highlights {
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.highlights-title {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.highlights-title:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+}
+
+.highlights-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.highlight-day {
+    display: flex;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.day-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    font-size: 0.9em;
+}
+
+.highlight-content {
+    flex-grow: 1;
+    padding: 15px;
+}
+
+.highlight-content h4 {
+    margin: 0 0 5px 0;
     font-size: 1.1em;
+    color: var(--secondary-color);
+}
+
+.highlight-content p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+/* 푸꾸옥 지도 섹션 */
+.overview-map {
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.map-title {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.map-container {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.map-placeholder {
+    height: 250px;
+    background-color: #d1e6f3;
+    position: relative;
+    border-radius: var(--border-radius);
+    background-image: url('https://source.unsplash.com/800x400/?map,phuquoc');
+    background-size: cover;
+    background-position: center;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.map-location {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.location-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
+.location-label {
+    background-color: white;
+    color: var(--text-color);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-top: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.legend-color.hotel {
+    background-color: #FF5722;
+}
+
+.legend-color.beach {
+    background-color: #2196F3;
+}
+
+.legend-color.attraction {
+    background-color: #4CAF50;
+}
+
+.legend-color.restaurant {
+    background-color: #9C27B0;
+}
+
+.legend-text {
+    font-size: 0.85em;
+    color: var(--text-color);
+}
+
+/* 날씨 섹션 */
+.weather-section {
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.weather-title {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.weather-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.weather-item {
+    text-align: center;
+    padding: 15px 10px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+}
+
+.weather-icon {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.weather-temp {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.weather-label {
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.weather-tip {
+    background-color: rgba(255, 152, 0, 0.1);
+    border-left: 3px solid var(--accent-color);
+    padding: 10px 15px;
+    margin: 10px 0 0 0;
+    font-size: 0.9em;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 table {
@@ -301,7 +634,23 @@ footer {
     }
     
     .trip-overview {
-        flex-direction: row;
+        gap: 40px;
+    }
+    
+    .overview-hero {
+        height: 250px;
+    }
+    
+    .overview-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .highlights-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .weather-container {
+        gap: 20px;
     }
     
     h1 {
@@ -330,6 +679,18 @@ footer {
     .container {
         max-width: 1000px;
     }
+    
+    .overview-hero {
+        height: 300px;
+    }
+    
+    .highlights-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .overview-map .map-placeholder {
+        height: 350px;
+    }
 }
 
 /* 다크 모드 지원 */
@@ -344,6 +705,32 @@ footer {
     
     .overview-item {
         background-color: #263238;
+        border-top: 5px solid var(--primary-color);
+    }
+    
+    .highlight-day {
+        background-color: #1a1a1a;
+    }
+    
+    .map-placeholder {
+        background-color: #263238;
+    }
+    
+    .location-label {
+        background-color: #333;
+        color: #fff;
+    }
+    
+    .map-legend {
+        background-color: #1a1a1a;
+    }
+    
+    .weather-item {
+        background-color: #1a1a1a;
+    }
+    
+    .weather-tip {
+        background-color: rgba(255, 152, 0, 0.05);
     }
     
     tr:nth-child(even) {
