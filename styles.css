@@ -1,15 +1,4 @@
-.section-content {
-    display: none;
-}
-
-.section-content.active {
-    display: block;
-}
-
-.top-nav a.active {
-    background-color: var(--primary-color);
-    color: white;
-}:root {
+:root {
     --primary-color: #05668D;
     --secondary-color: #028090;
     --accent-color: #FF9800;
@@ -48,6 +37,14 @@ header {
     margin-bottom: 20px;
 }
 
+.section-content {
+    display: none;
+}
+
+.section-content.active {
+    display: block;
+}
+
 .top-nav {
     position: sticky;
     top: 0;
@@ -60,6 +57,7 @@ header {
     -webkit-overflow-scrolling: touch;
     margin-bottom: 15px;
     text-align: center;
+    transition: top 0.3s;
 }
 
 .top-nav a {
@@ -71,6 +69,11 @@ header {
     font-size: 14px;
     font-weight: 500;
     border-radius: 20px;
+}
+
+.top-nav a.active {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .top-nav a:active,
@@ -117,7 +120,7 @@ h4 {
     margin-bottom: 20px;
 }
 
-/* 아이콘 폰트 스타일 (실제로는 Font Awesome이나 Material Icons 등을 사용할 수 있습니다) */
+/* 아이콘 폰트 스타일 */
 .icon-calendar:before { content: "📅"; }
 .icon-hotel:before { content: "🏨"; }
 .icon-plane:before { content: "✈️"; }
@@ -470,6 +473,7 @@ h4 {
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
+/* 테이블 스타일 개선 - 시간/일정 정렬 문제 해결 */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -477,6 +481,7 @@ table {
     font-size: 14px;
     border-radius: var(--border-radius);
     overflow: hidden;
+    table-layout: fixed; /* 고정 레이아웃 추가 */
 }
 
 thead {
@@ -484,15 +489,48 @@ thead {
     color: white;
 }
 
-th, td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+thead tr {
+    display: flex; /* 헤더를 flex로 변경 */
+    width: 100%;
 }
 
 th {
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 500;
     position: sticky;
     top: 50px;
+    z-index: 10;
+}
+
+th.time-col {
+    flex: 0 0 80px; /* 시간 컬럼 너비 고정 */
+    min-width: 80px;
+}
+
+th:not(.time-col) {
+    flex: 1; /* 일정 컬럼이 나머지 공간 차지 */
+}
+
+td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+tr {
+    display: flex; /* 모든 행을 flex로 설정 */
+    width: 100%;
+}
+
+tr td:first-child {
+    flex: 0 0 80px; /* 시간 컬럼 너비 고정 */
+    min-width: 80px;
+}
+
+tr td:not(:first-child) {
+    flex: 1; /* 일정 컬럼이 나머지 공간 차지 */
 }
 
 tr:nth-child(even) {
@@ -504,23 +542,11 @@ tr:last-child td {
 }
 
 /* 모바일에서 테이블 개선 */
-@media (max-width: 600px) {
-    .responsive-table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .time-col {
-        min-width: 80px;
-        width: 25%;
-    }
-    
-    th, td {
-        white-space: normal;
-        min-height: 3em;
-    }
+.responsive-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 ul, ol {
