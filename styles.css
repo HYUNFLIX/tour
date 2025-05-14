@@ -866,3 +866,75 @@ footer {
         border-color: #64b5f6;
     }
 }
+
+/* 방문지 버튼 스타일 */
+.map-locations-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 15px 0 25px 0;
+}
+
+.location-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.location-button:hover {
+    background-color: rgba(5, 102, 141, 0.1);
+    transform: translateX(3px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.location-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.location-icon.hotel {
+    background-color: #FF5722;
+}
+
+.location-icon.beach {
+    background-color: #2196F3;
+}
+
+.location-icon.attraction {
+    background-color: #4CAF50;
+}
+
+.location-icon.restaurant {
+    background-color: #9C27B0;
+}
+
+/* 태블릿/데스크톱 최적화 */
+@media (min-width: 768px) {
+    .map-locations-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    .location-button {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        border-left-color: #0288d1;
+    }
+    
+    .location-button:hover {
+        background-color: rgba(2, 136, 209, 0.15);
+    }
+}
