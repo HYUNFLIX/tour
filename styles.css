@@ -304,7 +304,7 @@ h4 {
     color: var(--text-color);
 }
 
-/* 푸꾸옥 지도 섹션 */
+/* 간소화된 지도 섹션 스타일 */
 .overview-map {
     margin-top: 20px;
     background-color: var(--card-bg);
@@ -321,63 +321,59 @@ h4 {
     text-align: center;
 }
 
-.map-container {
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    margin-bottom: 20px;
+.map-actions-simplified {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
 }
 
-.map-placeholder {
-    height: 250px;
-    background-color: #d1e6f3;
-    position: relative;
-    border-radius: var(--border-radius);
-    background-image: url('https://source.unsplash.com/800x400/?map,phuquoc');
-    background-size: cover;
-    background-position: center;
-}
-
-.map-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.map-location {
-    position: absolute;
-    transform: translate(-50%, -50%);
-}
-
-.location-dot {
-    width: 12px;
-    height: 12px;
-    background-color: var(--accent-color);
-    border: 2px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-}
-
-.location-label {
-    background-color: white;
+.map-intro {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1em;
     color: var(--text-color);
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.8em;
-    margin-top: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
+}
+
+.map-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.map-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 0.95em;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.map-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.map-button svg {
+    margin-right: 8px;
 }
 
 .map-legend {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 15px;
-    padding: 10px;
+    margin-top: 20px;
+    padding: 15px;
     background-color: var(--light-bg);
     border-radius: var(--border-radius);
 }
@@ -771,10 +767,6 @@ footer {
         grid-template-columns: repeat(4, 1fr);
     }
     
-    .overview-map .map-placeholder {
-        height: 350px;
-    }
-    
     /* 큰 화면에서 관광지 그리드 확장 */
     .attraction-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -800,17 +792,25 @@ footer {
         background-color: #1a1a1a;
     }
     
-    .map-placeholder {
-        background-color: #263238;
+    .map-intro {
+        color: #e0e0e0;
+    }
+    
+    .map-button {
+        background-color: #0288d1;
+    }
+    
+    .map-button:hover {
+        background-color: #039be5;
+    }
+    
+    .map-legend {
+        background-color: #1a1a1a;
     }
     
     .location-label {
         background-color: #333;
         color: #fff;
-    }
-    
-    .map-legend {
-        background-color: #1a1a1a;
     }
     
     .weather-item {
@@ -865,164 +865,4 @@ footer {
     .attraction-link:hover {
         border-color: #64b5f6;
     }
-}
-
-/* 지도 섹션 스타일 개선 */
-.overview-map {
-    margin-top: 20px;
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-}
-
-.map-title {
-    color: var(--primary-color);
-    font-size: 1.4em;
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.map-container {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.map-image {
-    width: 100%;
-    height: auto;
-    border-radius: var(--border-radius);
-    display: block;
-}
-
-.map-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none; /* 맵 이미지 클릭을 가능하게 함 */
-}
-
-.map-location {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-}
-
-.location-dot {
-    width: 14px;
-    height: 14px;
-    background-color: var(--accent-color);
-    border: 2px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.location-dot:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
-}
-
-.location-label {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    color: var(--text-color);
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.8em;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
-    z-index: 10;
-}
-
-.map-location:hover .location-label {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-.map-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.map-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 15px;
-    font-size: 0.9em;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.2s;
-}
-
-.map-button:hover {
-    background-color: var(--secondary-color);
-}
-
-.map-button svg {
-    margin-right: 6px;
-}
-
-.map-legend {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 15px;
-    padding: 10px;
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius);
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin: 5px 10px;
-}
-
-.legend-color {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.legend-color.hotel {
-    background-color: #FF5722;
-}
-
-.legend-color.beach {
-    background-color: #2196F3;
-}
-
-.legend-color.attraction {
-    background-color: #4CAF50;
-}
-
-.legend-color.restaurant {
-    background-color: #9C27B0;
-}
-
-.legend-text {
-    font-size: 0.85em;
-    color: var(--text-color);
 }
